@@ -16,4 +16,19 @@ Api
 method: `post`
 url: `http://localhost:8080/v1/form`
 content-type: `application/json` (is required) 
+ 
+```
+curl -X POST \
+  http://localhost:8080/v1/form \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: be747a7a-ad88-c438-8b7e-7ddcf763e5a0' \
+  -d '{
+	  "eventType": "copyAndPaste",
+  "websiteUrl": "https://ravelin.com",
+  "sessionId": "123123-123123-123123123",
+  "pasted": true,
+  "formId": "inputCardNumber"
+}'
 
+```
