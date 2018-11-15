@@ -13,17 +13,17 @@ func NewErrorResponse(code int, message string) *ErrorResponse {
 }
 
 type DataResponse struct {
-	WebsiteUrl string
-	SessionId  string
+	WebsiteUrl string `json:"websiteUrl"`
+	SessionId  string `json:"sessionId"`
 	ResizeFrom struct {
-		Width  string
-		Height string
-	}
+		Width  string `json:"width"`
+		Height string `json:"height"`
+	} `json:"resizeFrom"`
 	ResizeTo struct {
-		Width  string
-		Height string
-	}
-	CopyAndPaste       map[string]bool
-	FormCompletionTime int
-	Hash               string
+		Width  string `json:"width"`
+		Height string `json:"height"`
+	} `json:"resizeTo"`
+	CopyAndPaste       map[string]bool `json:"copyAndPaste"`
+	FormCompletionTime int             `json:"formCompletionTime"`
+	Hash               string          `json:"hash"`
 }

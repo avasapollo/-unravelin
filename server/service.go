@@ -41,6 +41,10 @@ func NewApiRest(printer printer.Printer, parser data.Parser, encoder encoder.Has
 	return api
 }
 
+func (api ApiRest) GetMuxRouter() *mux.Router {
+	return api.router
+}
+
 func (api ApiRest) PostForm(w http.ResponseWriter, r *http.Request) {
 	request := make(map[string]interface{})
 	// parse request
@@ -92,15 +96,15 @@ func (api ApiRest) buildResponse(data *data.Data, hash string) DataResponse {
 		WebsiteUrl: data.WebsiteUrl,
 		SessionId:  data.SessionId,
 		ResizeFrom: struct {
-			Width  string
-			Height string
+			Width  string `json:"width"`
+			Height string `json:"height"`
 		}{
 			Width:  data.ResizeFrom.Width,
 			Height: data.ResizeFrom.Height,
 		},
 		ResizeTo: struct {
-			Width  string
-			Height string
+			Width  string `json:"width"`
+			Height string `json:"height"`
 		}{
 			Width:  data.ResizeTo.Width,
 			Height: data.ResizeTo.Height,
@@ -124,7 +128,7 @@ func (api ApiRest) middleWareJsonFormat(h http.Handler) http.Handler {
 		if contentType != "application/json" {
 			api.write(w, http.StatusBadRequest,
 				NewErrorResponse(http.StatusBadRequest,
-					fmt.Sprintf("%s is not allowed, you have to use application/json")))
+					fmt.Sprintf("%s is not allowed, you have to use application/json", contentType)))
 			return
 		}
 		// application/json content
