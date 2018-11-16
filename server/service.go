@@ -117,10 +117,6 @@ func (api ApiRest) buildResponse(data *data.Data, hash string) DataResponse {
 
 func (api ApiRest) middleWareJsonFormat(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		// TODO: remove
-		h.ServeHTTP(w, r)
-		return
-
 		contentType := r.Header.Get("Content-type")
 		if contentType == "" {
 			api.write(w, http.StatusBadRequest,
