@@ -40,17 +40,24 @@ func (p parser) ParseMapToData(input map[string]interface{}) (*Data, error) {
 }
 
 func getDimension(input interface{}) Dimension {
+	var dimension Dimension
+
 	if input == nil {
-		return Dimension{}
+		return dimension
 	}
 
-	m, ok := input.(map[string]string)
+	m, ok := input.(map[string]interface{})
 	if !ok {
-		return Dimension{}
+		return dimension
 	}
 
-	return Dimension{
-		Width:  m["width"],
-		Height: m["height"],
+	if w, ok := m["width"].(string); ok {
+		dimension.Width = w
 	}
+
+	if h, ok := m["height"].(string); ok {
+		dimension.Height = h
+	}
+
+	return dimension
 }

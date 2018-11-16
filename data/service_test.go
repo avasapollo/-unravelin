@@ -22,8 +22,8 @@ func TestParser_ParseMapToData(t *testing.T) {
 	input["sessionId"] = "sessionId"
 	input["copiedAndPaste"] = map[string]bool{"name": true}
 	input["time"] = 10
-	input["resizeFrom"] = map[string]string{"width": "10px", "height": "10px"}
-	input["resizeTo"] = map[string]string{"width": "10px", "height": "10px"}
+	input["resizeFrom"] = map[string]interface{}{"width": "10px", "height": "10px"}
+	input["resizeTo"] = map[string]interface{}{"width": "10px", "height": "10px"}
 
 	output, err := p.ParseMapToData(input)
 	require.Nil(t, err)
